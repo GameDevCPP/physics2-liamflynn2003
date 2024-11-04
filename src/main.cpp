@@ -9,11 +9,13 @@
 using namespace std;
 using namespace sf;
 
-// Constants
-const float physics_scale = 30.0f; // 1 SFML unit = 30 Physics units
-const float physics_scale_inv = 1.0f / physics_scale; // Inverse of physics scale
-const int32 velocityIterations = 6; // Physics simulation iterations
-const int32 positionIterations = 2; // Physics simulation iterations
+// 1 sfml unit = 30 physics units
+const float physics_scale = 30.0f;
+// inverse of physics_scale, useful for calculations
+const float physics_scale_inv = 1.0f / physics_scale;
+// Magic numbers for accuracy of physics simulation
+const int32 velocityIterations = 6;
+const int32 positionIterations = 2;
 
 // Game window dimensions
 const int gameWidth = 800;
@@ -69,7 +71,6 @@ b2World* world;
 std::vector<b2Body*> bodies;
 std::vector<RectangleShape*> sprites;
 void init() {
-    // Initialize Box2D world with gravity
     const b2Vec2 gravity(0.0f, -10.0f);
     world = new b2World(gravity);
 
@@ -86,7 +87,8 @@ void init() {
     };
 
     // Build Walls
-    for (int i = 0; i < 8; i += 2) {  // Correct loop to cover all four walls
+    for (int i = 0; i < 8; i += 2) {
+        // Create SFML shapes for each wall
         auto s = new RectangleShape();
         s->setPosition(walls[i]);
         s->setSize(walls[i + 1]);

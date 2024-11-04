@@ -1,22 +1,17 @@
 cmake_minimum_required(VERSION 3.21)
 project(physics2-liamflynn2003 LANGUAGES CXX)
 
-# Set the SFML directory to your local path
 set(SFML_DIR "C:/SFML-2.6.1/lib/cmake/SFML")
 find_package(SFML 2.6.1 COMPONENTS system window graphics network audio REQUIRED)
 
-# B2D - Box2D physics library
 add_subdirectory("lib/b2d/Box2D")
 set(B2D_INCS "lib/b2d/Box2D/")
 
-# Define the main executable
 add_executable(physics2-liamflynn2003 src/main.cpp
         src/main.cpp)
 
-# Include directories
 target_include_directories(physics2-liamflynn2003 PRIVATE ${B2D_INCS} ${SFML_INCLUDE_DIRS})
 
-# Link libraries
 target_link_libraries(physics2-liamflynn2003 PRIVATE sfml-graphics Box2D)
 target_compile_features(physics2-liamflynn2003 PRIVATE cxx_std_17)
 
